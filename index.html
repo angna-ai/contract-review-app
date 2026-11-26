@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>Contract Review</h1>
+        <p>Upload a contract and ask questions about it</p>
+      </div>
+    </div>
+    <div id="file-pill" class="file-pill" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+      <span id="file-name"></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- Left column: contract -->
+    <section class="panel contract-panel" aria-label="Contract">
+      <div class="panel-header">
+        <div class="panel-title">
+          <h2>Contract</h2>
+          <span id="file-badge" class="badge" hidden>PDF</span>
+        </div>
+        <button id="replace-btn" class="btn-outline" type="button" hidden>Upload another</button>
+      </div>
+
+      <p id="upload-error" class="upload-error" role="alert" hidden></p>
+
+      <div class="contract-body">
+        <label id="drop-zone" class="drop-zone" for="file-input">
+          <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+          <span class="drop-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          </span>
+          <span class="drop-title">Drop a PDF contract here</span>
+          <span class="drop-sub">or <span class="link">browse your files</span></span>
+        </label>
+
+        <iframe id="pdf-viewer" class="pdf-viewer" title="Contract preview" hidden></iframe>
+      </div>
+    </section>
+
+    <!-- Right column: chat -->
+    <section class="panel chat-panel" aria-label="Chat">
+      <div class="panel-header">
+        <h2>Ask about this contract</h2>
+        <span class="status"><span class="status-dot"></span>Answers cite your contract</span>
+      </div>
+
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="message assistant">
+          <div class="avatar" aria-hidden="true">AI</div>
+          <div class="bubble"><p class="bubble-text">Hi! Upload a contract on the left, then ask me anything about it.</p></div>
+        </div>
+      </div>
+
+      <div class="suggestions">
+        <button class="chip" type="button">Summarize key terms</button>
+        <button class="chip" type="button">Find payment terms</button>
+        <button class="chip" type="button">List risky clauses</button>
+      </div>
+
+      <form id="chat-form" class="chat-form">
+        <label for="chat-input" class="visually-hidden">Your question</label>
+        <textarea id="chat-input" rows="1" placeholder="Type a question about the contract…"></textarea>
+        <button id="send-btn" type="submit" class="btn-primary" disabled>
+          Send
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
